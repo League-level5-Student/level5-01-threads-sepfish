@@ -8,66 +8,33 @@ public class OlympicRings_Threaded {
 	// Make A Program that uses Threads and robots to draw the Olympic rings. One robot should draw one ring simultaneously with the other 4 robots.
 	public static void main(String[] args) {
 		Robot piko = new Robot("mini");
+		Robot nana = new Robot("mini");
+		Robot seeU = new Robot("mini");
+		Robot miki = new Robot("mini");
+		Robot lily = new Robot("mini");
 		
-		piko.moveTo(200, 400);
-		piko.setSpeed(100);
-		piko.penDown();
-		piko.setPenWidth(10);
+		Thread a = new Thread(() -> circle(piko, 200, 400, 0, 133, 199));
+		Thread b = new Thread(() -> circle(nana, 325, 525, 244, 195, 0));
+		Thread c = new Thread(() -> circle(seeU, 450, 400, 0, 0, 0));
+		Thread d = new Thread(() -> circle(miki, 575, 525, 0, 159, 61));
+		Thread e = new Thread(() -> circle(lily, 700, 400, 223, 0, 37));
 		
-		//blue
-		piko.setPenColor(new Color(0, 133, 199));
-		
+		a.start();
+		b.start();
+		c.start();
+		d.start();
+		e.start();
+	}
+	
+	static void circle(Robot robot, int x, int y, int r, int g, int b) {
+		robot.moveTo(x, y);
+		robot.setSpeed(100);
+		robot.penDown();
+		robot.setPenWidth(10);
+		robot.setPenColor(new Color(r, g, b));
 		for (int i = 0; i < 360; i++) {
-			piko.move(2);
-			piko.turn(1);
-		}
-		
-		piko.penUp();
-		piko.moveTo(325, 525);
-		piko.penDown();
-		
-		//yellow
-		piko.setPenColor(new Color(244, 195, 0));
-		
-		for (int i = 0; i < 360; i++) {
-			piko.move(2);
-			piko.turn(1);
-		}
-		
-		piko.penUp();
-		piko.moveTo(450, 400);
-		piko.penDown();
-		
-		//black
-		piko.setPenColor(new Color(0, 0, 0));
-		
-		for (int i = 0; i < 360; i++) {
-			piko.move(2);
-			piko.turn(1);
-		}
-		
-		piko.penUp();
-		piko.moveTo(575, 525);
-		piko.penDown();
-		
-		//green
-		piko.setPenColor(new Color(0, 159, 61));
-		
-		for (int i = 0; i < 360; i++) {
-			piko.move(2);
-			piko.turn(1);
-		}
-		
-		piko.penUp();
-		piko.moveTo(700, 400);
-		piko.penDown();
-		
-		//red
-		piko.setPenColor(new Color(223, 0, 37));
-		
-		for (int i = 0; i < 360; i++) {
-			piko.move(2);
-			piko.turn(1);
+			robot.move(2);
+			robot.turn(1);
 		}
 	}
 }
